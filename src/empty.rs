@@ -8,6 +8,14 @@ pub trait BestBidNftContract {
     #[init]
     fn init(&self) {}
 
+
+    #[payable("VIBE-3f3a04")]
+    #[endpoint]
+    fn set_rewards(&self){
+        let esdt = self.call_value().single_esdt();
+        self.rewards().set(&esdt);
+    }
+
     #[payable("VIBE-75ab7f")]
     #[endpoint]
     fn set_nft(&self){
@@ -53,5 +61,10 @@ pub trait BestBidNftContract {
     #[view(getNFTs)]
     #[storage_mapper("nfts_list")]
     fn nfts_list(&self,addr: &ManagedAddress) -> UnorderedSetMapper<EsdtTokenPayment>;
+
+    #[view(getRewards)]
+    #[storage_mapper("rewards")]
+    fn rewards(&self) -> SingleValueMapper<EsdtTokenPayment>;
+
     
 }

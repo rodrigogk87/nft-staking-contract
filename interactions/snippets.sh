@@ -48,6 +48,20 @@ setNft(){
         --send || return
 }
 
+method_name=0x7365745f72657761726473
+esdt_token=0x564942452d336633613034
+esdt_token_amount=100000
+
+setRewards(){
+    mxpy --verbose contract call ${SC_ADDRESS} --recall-nonce \
+        --pem=${USER_PEM} \
+        --gas-limit=6000000 \
+        --proxy=${PROXY} --chain=${CHAIN_ID} \
+        --function="ESDTTransfer" \
+        --arguments $esdt_token $esdt_token_amount $method_name\
+        --send || return
+}
+
 getNfts(){
    mxpy --verbose contract call ${SC_ADDRESS} \
     --proxy=${PROXY} --chain=${CHAIN_ID} \
