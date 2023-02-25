@@ -35,7 +35,7 @@ setBid(){
 user_address="$(mxpy wallet pem-address $USER_PEM)"
 method_name=0x7365745f6e6674
 nft_token=0x564942452d373561623766
-nft_token_nonce=1
+nft_token_nonce=2
 nft_token_amount=1
 
 setNft(){
@@ -46,6 +46,14 @@ setNft(){
         --function="ESDTNFTTransfer" \
         --arguments $nft_token $nft_token_nonce $nft_token_amount $SC_ADDRESS $method_name \
         --send || return
+}
+
+getNfts(){
+   mxpy --verbose contract call ${SC_ADDRESS} \
+    --proxy=${PROXY} --chain=${CHAIN_ID} \
+    --send --recall-nonce --pem=${USER_PEM} \
+    --gas-limit=10000000 \
+    --function="get_nft"
 }
 
 

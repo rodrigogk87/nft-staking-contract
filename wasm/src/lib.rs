@@ -5,9 +5,9 @@
 ////////////////////////////////////////////////////
 
 // Init:                                 1
-// Endpoints:                            5
+// Endpoints:                            6
 // Async Callback (empty):               1
-// Total number of exported functions:   7
+// Total number of exported functions:   8
 
 #![no_std]
 #![feature(alloc_error_handler, lang_items)]
@@ -19,6 +19,7 @@ multiversx_sc_wasm_adapter::endpoints! {
     myfirst_contract
     (
         set_nft
+        get_nft
         set_bid
         getHighestBidder
         getHighestBid

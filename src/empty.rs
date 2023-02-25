@@ -16,6 +16,17 @@ pub trait BestBidNftContract {
         self.nfts_list(&caller).insert(nft);
     }
 
+    #[endpoint]
+    fn get_nft(&self){
+        let caller = self.blockchain().get_caller();
+        
+        for token in self.nfts_list(&caller).iter() {
+            self.send().direct_esdt(&caller, &token.token_identifier, token.token_nonce, &token.amount);                     
+        }
+          
+        self.nfts_list(&caller).clear();
+    }
+
     #[payable("EGLD")]
     #[endpoint]
     fn set_bid(&self){
